@@ -7,44 +7,27 @@
   <link rel="stylesheet" type="text/css" href="node_modules/materialize-css/dist/css/materialize.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <script src="node_modules/jquery/dist/jquery.js"></script>
-  <script src="node_modules/vue/dist/vue.js"></script>
-  <script src="node_modules/vue-router/dist/vue-router.js"></script>
-  <script src="node_modules/vuex/dist/vuex.js"></script>
-  <script src="node_modules/materialize-css/dist/js/materialize.js"></script>
+  <style type="text/css">
 
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+  nav .nav-wrapper form, nav .nav-wrapper form .input-field{
+    height: 100%;
+  }
+
+  </style>
 </head>
-<body class="blue-grey darken-4 grey-text text-lighten-2">
-  <div id="app">
-    <header>
-      <ul id="dropdown1" class="dropdown-content grey darken-3">
-        <li><a href="#!" class="grey-text text-lighten-2">My Matches</a></li>
-        <li><a href="#!">Friends</a></li>
-        <li class="divider"></li>
-        <li>
-          <a href="#!"><i class="material-icons left">not_interested</i> Log out</a>
-        </li>
-      </ul>
-      <nav>
-        <div class="nav-wrapper grey darken-4">
-          <div class="container">
-            <a href="#" class="brand-logo">Logo</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-              <li>
-                <a class="dropdown-button" href="#!" data-activates="dropdown1">
-                  Ivan Pidov <i class="material-icons right">arrow_drop_down</i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
-    <div class="container">
-      <h1>{{title}}</h1>
-    </div>
-  </div>
+<body class="blue-grey darken-4 grey-text text-lighten-2"  id="app">
+	<app-component></app-component>
 
-  <script src="app.js"></script>
+  <script src="bundle.js"></script>
 </body>
 </html>
