@@ -8,8 +8,12 @@
 	        <a href="{{item.url}}" class="grey-text text-lighten-2">{{item.name}}</a>
 	      </li>
           <li>
-            <a class="dropdown-button" href="#!" data-activates="dropdown1">
-              Ivan Pidov <i class="material-icons right">arrow_drop_down</i>
+          	<a v-if="!login" href="/auth/steam" class="login-button">
+          		<img class="steam-icon" src="https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_01.png">
+          	</a>
+            <a v-if="login"  href="#!" data-activates="profile-dropdown">
+              {{username}}
+              <i class="material-icons right tiny">settings</i>
             </a>
           </li>
         </ul>

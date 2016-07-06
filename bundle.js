@@ -24672,21 +24672,6 @@
 	  components: {
 	    'header-component': _header2.default,
 	    'footer-component': _footer2.default
-	  },
-	  ready: function ready() {
-	    var self = this;
-	    var request = __webpack_require__(15);
-	    request.get("/api/user").end(function (err, res) {
-	      console.log(res.body.expanded);
-	      self.username = res.body.username;
-	      self.login = res.body.login;
-	    });
-
-	    setTimeout(function () {
-	      request.get("/api/recentGames").end(function (err, res) {
-	        console.log(res.body);
-	      });
-	    }, 5000);
 	  }
 	});
 
@@ -24758,8 +24743,11 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var HeaderComponent = _vue2.default.extend({
+	  template: _header2.default,
 	  data: function data() {
 	    return {
+	      login: false,
+	      username: '',
 	      topLevelNav: [{
 	        name: 'Home',
 	        url: '/home'
@@ -24769,9 +24757,14 @@
 	      }]
 	    };
 	  },
-	  template: _header2.default
-	  // the above is ES6 shorthand for:
-	  // template: template
+	  ready: function ready() {
+	    var self = this;
+	    var request = __webpack_require__(15);
+	    request.get("/api/user").end(function (err, res) {
+	      self.username = res.body.username;
+	      self.login = res.body.login;
+	    });
+	  }
 	});
 
 	exports.default = HeaderComponent;
@@ -27777,7 +27770,7 @@
 /* 13 */
 /***/ function(module, exports) {
 
-	module.exports = "<header>\r\n  <nav>\r\n    <div class=\"nav-wrapper grey darken-4\">\r\n      <div class=\"container\">\r\n        <a href=\"#\" class=\"brand-logo\">Logo</a>\r\n        <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\r\n          <li v-for=\"item in topLevelNav\">\r\n\t        <a href=\"{{item.url}}\" class=\"grey-text text-lighten-2\">{{item.name}}</a>\r\n\t      </li>\r\n          <li>\r\n            <a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">\r\n              Ivan Pidov <i class=\"material-icons right\">arrow_drop_down</i>\r\n            </a>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n    </div>\r\n  </nav>\r\n</header>\r\n"
+	module.exports = "<header>\r\n  <nav>\r\n    <div class=\"nav-wrapper grey darken-4\">\r\n      <div class=\"container\">\r\n        <a href=\"#\" class=\"brand-logo\">Logo</a>\r\n        <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\r\n          <li v-for=\"item in topLevelNav\">\r\n\t        <a href=\"{{item.url}}\" class=\"grey-text text-lighten-2\">{{item.name}}</a>\r\n\t      </li>\r\n          <li>\r\n          \t<a v-if=\"!login\" href=\"/auth/steam\" class=\"login-button\">\r\n          \t\t<img class=\"steam-icon\" src=\"https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_01.png\">\r\n          \t</a>\r\n            <a v-if=\"login\"  href=\"#!\" data-activates=\"profile-dropdown\">\r\n              {{username}}\r\n              <i class=\"material-icons right tiny\">settings</i>\r\n            </a>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n    </div>\r\n  </nav>\r\n</header>\r\n"
 
 /***/ },
 /* 14 */

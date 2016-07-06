@@ -3,8 +3,11 @@ import template from './header.html';
 import $ from 'jquery'
 
 const HeaderComponent = Vue.extend({
+  template: template,
   data: function() {
   	return {
+  		login: false,
+  		username: '',
   		topLevelNav: [{
 	  		name: 'Home',
 	  		url: '/home'
@@ -14,9 +17,16 @@ const HeaderComponent = Vue.extend({
 	  	}]
   	}
   },
-  template: template
-  // the above is ES6 shorthand for:
-  // template: template
+  ready: function() {
+  	var self = this;
+  	var request = require('superagent');
+  	request.get("/api/user")
+  		.end(function(err, res) {
+  			self.username = res.body.username;
+  			self.login = res.body.login;
+  		})
+
+  }
 });
 
 export default HeaderComponent;
