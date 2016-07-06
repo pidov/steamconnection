@@ -10,7 +10,16 @@
   "author": "Ivan Pidov <ivan.pidov@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "es6-promise": "^3.2.1",
+    "express": "^4.14.0",
+    "express-session": "^1.14.0",
+    "isomorphic-fetch": "^2.2.1",
     "materialize-css": "^0.97.6",
+    "passport": "^0.3.2",
+    "passport-steam": "^1.0.4",
+    "steam-login": "^0.1.4",
+    "superagent": "^2.0.0",
     "vue": "^1.0.26-csp",
     "vue-router": "^0.7.13",
     "vuex": "^2.0.0-rc.1"

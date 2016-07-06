@@ -15,8 +15,6 @@ var app = new Vue({
 		console.log("Application initialized")
 	},
 	attached: function() {
-    		Materialize.updateTextFields();
-		console.log($('input'))
 		$(document).ready(function() {
     		Materialize.updateTextFields();
 		})
