@@ -24763,6 +24763,7 @@
 	    request.get("/api/user").end(function (err, res) {
 	      self.username = res.body.username;
 	      self.login = res.body.login;
+	      console.log(res.body);
 	    });
 	  }
 	});

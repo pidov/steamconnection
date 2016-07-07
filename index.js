@@ -1,3 +1,6 @@
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
+
 var express = require('express');
 var passport = require('passport');
 var SteamStrategy = require('passport-steam').Strategy;
@@ -8,8 +11,8 @@ var superagent = require('superagent');
 
 var app = express();
 
-require('es6-promise').polyfill();
-require('isomorphic-fetch');
+
+var steamApi = require('./endpoints');
 
 app.use(session({secret: 'keyboard cat maybe not'}));
 app.use(passport.initialize());
@@ -39,7 +42,6 @@ passport.use(new SteamStrategy({
 app.get('/auth/steam', passport.authenticate('steam'));
 
 app.get("/api/user", function(req, res) {
-
     if (req.user) {
         res.json({
             login: true,
@@ -52,28 +54,6 @@ app.get("/api/user", function(req, res) {
         })
     }
 })
-app.get('/api/recentGames', function(request, response) {
-	var userId = request.user.id;
-	var url = 'http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=' + apiKey + '&steamid='+ userId  +'&format=json';
-	superagent.get(url).end(function(err, res) {
-		console.log(res.body);
-		response.json(res.body);
-	})
-})
-
-app.get('/api/stats', function(request, response) {
-	var userId = request.user.id;
-	var url = 'http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=' + apiKey + '&steamid='+ userId  +'&format=json';
-	superagent.get(url).end(function(err, res) {
-		console.log(res.body);
-		response.json(res.body);
-	})
-})
-
-app.get('/api/test', function(req, res) {
-	console.log("Protected endpoint: ", req.user, res.json({response: req.user}))
-})
-
 app.get('/auth/steam/callback',
     passport.authenticate('steam', {
     	failureRedirect: '/login'
@@ -87,6 +67,13 @@ app.get('/logout', function (req, res){
   req.logOut();
   res.redirect('/')
 });
+
+app.get('/api/recentGames', function(request, response) {
+	var url = steamApi.getRecentGames + '/?key=' + apiKey + '&steamid='+ request.user.id  +'&format=json';
+	superagent.get(url).end(function(err, res) {
+		response.json(res.body);
+	})
+})
 
 var server = app.listen(3000, function () {
   var host = server.address().address;

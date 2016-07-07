@@ -24,6 +24,7 @@ const HeaderComponent = Vue.extend({
   		.end(function(err, res) {
   			self.username = res.body.username;
   			self.login = res.body.login;
+  			console.log(res.body);
   		})
 
   }
