@@ -24696,8 +24696,23 @@
 	  data: function data() {
 	    return {
 	      username: 'loading...',
-	      login: false
+	      login: false,
+	      topLevelNav: [{
+	        name: 'Home',
+	        url: '/'
+	      }, {
+	        name: 'Login',
+	        url: '/login'
+	      }]
 	    };
+	  },
+	  ready: function ready() {
+	    var self = this;
+	    var request = __webpack_require__(29);
+	    request.get("/api/user").end(function (err, res) {
+	      self.username = res.body.username;
+	      self.login = res.body.login;
+	    });
 	  },
 	  components: {
 	    'header-component': _header2.default,
@@ -24764,12 +24779,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var FooterComponent = _vue2.default.extend({
-	  data: function data() {
-	    return {};
-	  },
 	  template: _index2.default
-	  // the above is ES6 shorthand for:
-	  // template: template
 	});
 	
 	exports.default = FooterComponent;
@@ -24800,28 +24810,7 @@
 	
 	var HeaderComponent = _vue2.default.extend({
 	  template: _header2.default,
-	  data: function data() {
-	    return {
-	      login: false,
-	      username: '',
-	      topLevelNav: [{
-	        name: 'Home',
-	        url: '/home'
-	      }, {
-	        name: 'Contacts',
-	        url: '/contacts'
-	      }]
-	    };
-	  },
-	  ready: function ready() {
-	    var self = this;
-	    var request = __webpack_require__(29);
-	    request.get("/api/user").end(function (err, res) {
-	      self.username = res.body.username;
-	      self.login = res.body.login;
-	      console.log(res.body);
-	    });
-	  }
+	  props: ['login', 'username', 'topLevelNav']
 	});
 	
 	exports.default = HeaderComponent;
@@ -27917,7 +27906,7 @@
 /* 24 */
 /***/ function(module, exports) {
 
-	module.exports = "<header-component></header-component>\r\n<main>\r\n\t<div class=\"container\">\r\n\t\t<div class=\"row\">\r\n\t\t\t<div class=\"col s12\">\r\n\t\t\t\t<h1> Hi that's my site</h1>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"col s4\">\r\n\t\t\t\tdata:\r\n\r\n\t\t\t\t<div>\r\n\t\t\t\t\t{{username}}\r\n\t\t\t\t\t{{login}}\r\n\t\t\t\t\t<a href=\"http://127.0.0.1:3000/auth/steam\">Login with steam</a>\r\n\t\t\t\t</div>\r\n\t\t\t\t<form class=\"row\">\r\n\t        \t\t<div class=\"input-field col s12\">\r\n\t\t\t\t      <input value=\"Alvin\" id=\"first_name2\" type=\"text\" class=\"validate\">\r\n\t\t\t\t      <label class=\"active\" for=\"first_name2\">First Name</label>\r\n\t\t\t\t    </div>\r\n\t\t\t\t    <div class=\"input-field col s12\">\r\n\t\t\t\t      <input value=\"Alvin\" id=\"first_name2\" type=\"text\" class=\"validate\">\r\n\t\t\t\t      <label class=\"active\" for=\"first_name2\">First Name</label>\r\n\t\t\t\t    </div>\r\n\t        \t</form>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</div>\r\n</main>\r\n<footer-component></footer-component>\r\n"
+	module.exports = "<header-component :username=\"username\" :login=\"login\" :top-level-nav=\"topLevelNav\"></header-component>\r\n<main>\r\n\t<div class=\"container\">\r\n\t\t<div class=\"row\">\r\n\t\t\t<div class=\"col s12\">\r\n\t\t\t\t<h1> Hi that's my site</h1>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"col s4\">\r\n\t\t\t\tdata:\r\n\r\n\t\t\t\t<div>\r\n\t\t\t\t\t{{username}}\r\n\t\t\t\t\t{{login}}\r\n\t\t\t\t\t<a href=\"http://127.0.0.1:3000/auth/steam\">Login with steam</a>\r\n\t\t\t\t</div>\r\n\t\t\t\t<form class=\"row\">\r\n\t        \t\t<div class=\"input-field col s12\">\r\n\t\t\t\t      <input value=\"Alvin\" id=\"first_name2\" type=\"text\" class=\"validate\">\r\n\t\t\t\t      <label class=\"active\" for=\"first_name2\">First Name</label>\r\n\t\t\t\t    </div>\r\n\t\t\t\t    <div class=\"input-field col s12\">\r\n\t\t\t\t      <input value=\"Alvin\" id=\"first_name2\" type=\"text\" class=\"validate\">\r\n\t\t\t\t      <label class=\"active\" for=\"first_name2\">First Name</label>\r\n\t\t\t\t    </div>\r\n\t        \t</form>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</div>\r\n</main>\r\n<footer-component></footer-component>\r\n"
 
 /***/ },
 /* 25 */

@@ -9,9 +9,25 @@ const AppComponent = Vue.extend({
   data: function() {
   	return {
   		username: 'loading...',
-  		login: false
+  		login: false,
+  		topLevelNav: [{
+	  		name: 'Home',
+	  		url: '/'
+	  	}, {
+	  		name: 'Login',
+	  		url: '/login'
+	  	}]
   	}
   },
+  ready: function() {
+  	var self = this;
+  	var request = require('superagent');
+  	request.get("/api/user")
+		.end(function(err, res) {
+			self.username = res.body.username;
+			self.login = res.body.login;
+		})
+	},
   components: {
     'header-component': HeaderComponent,
     'footer-component': FooterComponent
