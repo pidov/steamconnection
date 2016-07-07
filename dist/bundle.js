@@ -24695,7 +24695,7 @@
 	  template: _appComponent2.default,
 	  data: function data() {
 	    return {
-	      username: 'loading...',
+	      user: 'loading...',
 	      login: false,
 	      topLevelNav: [{
 	        name: 'Home',
@@ -24707,12 +24707,11 @@
 	    };
 	  },
 	  ready: function ready() {
-	    var self = this;
 	    var request = __webpack_require__(29);
 	    request.get("/api/user").end(function (err, res) {
-	      self.username = res.body.username;
-	      self.login = res.body.login;
-	    });
+	      this.user = res.body.user;
+	      this.login = res.body.login;
+	    }.bind(this));
 	  },
 	  components: {
 	    'header-component': _header2.default,
@@ -24810,7 +24809,7 @@
 	
 	var HeaderComponent = _vue2.default.extend({
 	  template: _header2.default,
-	  props: ['login', 'username', 'topLevelNav']
+	  props: ['login', 'user', 'topLevelNav']
 	});
 	
 	exports.default = HeaderComponent;
@@ -27906,7 +27905,7 @@
 /* 24 */
 /***/ function(module, exports) {
 
-	module.exports = "<header-component :username=\"username\" :login=\"login\" :top-level-nav=\"topLevelNav\"></header-component>\r\n<main>\r\n\t<div class=\"container\">\r\n\t\t<div class=\"row\">\r\n\t\t\t<div class=\"col s12\">\r\n\t\t\t\t<h1> Hi that's my site</h1>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"col s4\">\r\n\t\t\t\tdata:\r\n\r\n\t\t\t\t<div>\r\n\t\t\t\t\t{{username}}\r\n\t\t\t\t\t{{login}}\r\n\t\t\t\t\t<a href=\"http://127.0.0.1:3000/auth/steam\">Login with steam</a>\r\n\t\t\t\t</div>\r\n\t\t\t\t<form class=\"row\">\r\n\t        \t\t<div class=\"input-field col s12\">\r\n\t\t\t\t      <input value=\"Alvin\" id=\"first_name2\" type=\"text\" class=\"validate\">\r\n\t\t\t\t      <label class=\"active\" for=\"first_name2\">First Name</label>\r\n\t\t\t\t    </div>\r\n\t\t\t\t    <div class=\"input-field col s12\">\r\n\t\t\t\t      <input value=\"Alvin\" id=\"first_name2\" type=\"text\" class=\"validate\">\r\n\t\t\t\t      <label class=\"active\" for=\"first_name2\">First Name</label>\r\n\t\t\t\t    </div>\r\n\t        \t</form>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</div>\r\n</main>\r\n<footer-component></footer-component>\r\n"
+	module.exports = "<header-component :user=\"user\" :login=\"login\" :top-level-nav=\"topLevelNav\"></header-component>\r\n<main>\r\n\t<div class=\"container\">\r\n\t\t<div class=\"row\">\r\n\t\t\t<div class=\"col s12\">\r\n\t\t\t\t<h1> Hello {{user.displayName}}</h1>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"col s12\">\r\n\t\t\t\t<table class=\"bordered highlight grey darken-4\">\r\n\t\t\t\t\t<tbody>\r\n\t\t\t\t\t\t<tr v-for=\"detail in user._json\">\r\n\t\t\t\t\t\t\t<th>{{$key}}</th>\r\n\t\t\t\t\t\t\t<td>{{detail}}</td>\r\n\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t</tbody>\r\n\r\n\t\t\t\t</table>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</div>\r\n</main>\r\n<footer-component></footer-component>\r\n"
 
 /***/ },
 /* 25 */
@@ -27918,7 +27917,7 @@
 /* 26 */
 /***/ function(module, exports) {
 
-	module.exports = "<header>\r\n  <nav>\r\n    <div class=\"nav-wrapper grey darken-4\">\r\n      <div class=\"container\">\r\n        <a href=\"#\" class=\"brand-logo\">Logo</a>\r\n        <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\r\n          <li v-for=\"item in topLevelNav\">\r\n\t        <a href=\"{{item.url}}\" class=\"grey-text text-lighten-2\">{{item.name}}</a>\r\n\t      </li>\r\n          <li>\r\n          \t<a v-if=\"!login\" href=\"/auth/steam\" class=\"login-button\">\r\n          \t\t<img class=\"steam-icon\" src=\"https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_01.png\">\r\n          \t</a>\r\n            <a v-if=\"login\"  href=\"#!\" data-activates=\"profile-dropdown\">\r\n              {{username}}\r\n              <i class=\"material-icons right tiny\">settings</i>\r\n            </a>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n    </div>\r\n  </nav>\r\n</header>\r\n"
+	module.exports = "<header>\r\n  <nav>\r\n    <div class=\"nav-wrapper grey darken-4\">\r\n      <div class=\"container\">\r\n        <a href=\"#\" class=\"brand-logo\">Logo</a>\r\n        <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\r\n          <li v-for=\"item in topLevelNav\">\r\n\t        <a href=\"{{item.url}}\" class=\"grey-text text-lighten-2\">{{item.name}}</a>\r\n\t      </li>\r\n          <li>\r\n          \t<a v-if=\"!login\" href=\"/auth/steam\" class=\"login-button\">\r\n          \t\t<img class=\"steam-icon\" src=\"https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_01.png\">\r\n          \t</a>\r\n            <a v-if=\"login\"  href=\"#!\" data-activates=\"profile-dropdown\">\r\n              <img v-bind:src=user._json.avatar>\r\n              {{user.displayName}}\r\n              <i class=\"material-icons right tiny\">settings</i>\r\n            </a>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n    </div>\r\n  </nav>\r\n</header>\r\n"
 
 /***/ },
 /* 27 */

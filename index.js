@@ -43,10 +43,10 @@ app.get('/auth/steam', passport.authenticate('steam'));
 
 app.get("/api/user", function(req, res) {
     if (req.user) {
+    	var user = req.user;
         res.json({
-            login: true,
-            username: req.user._json.personaname,
-            expanded: req.user
+            user: user,
+            login: true
         })
     } else {
         res.json({

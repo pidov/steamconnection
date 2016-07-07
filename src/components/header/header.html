@@ -12,7 +12,8 @@
           		<img class="steam-icon" src="https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_01.png">
           	</a>
             <a v-if="login"  href="#!" data-activates="profile-dropdown">
-              {{username}}
+              <img v-bind:src=user._json.avatar>
+              {{user.displayName}}
               <i class="material-icons right tiny">settings</i>
             </a>
           </li>

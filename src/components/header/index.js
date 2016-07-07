@@ -4,7 +4,7 @@ import $ from 'jquery'
 
 const HeaderComponent = Vue.extend({
   template: template,
-  props: ['login', 'username', 'topLevelNav']
+  props: ['login', 'user', 'topLevelNav']
 });
 
 export default HeaderComponent;

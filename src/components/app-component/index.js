@@ -8,7 +8,7 @@ const AppComponent = Vue.extend({
   template: template,
   data: function() {
   	return {
-  		username: 'loading...',
+  		user: 'loading...',
   		login: false,
   		topLevelNav: [{
 	  		name: 'Home',
@@ -20,13 +20,12 @@ const AppComponent = Vue.extend({
   	}
   },
   ready: function() {
-  	var self = this;
   	var request = require('superagent');
   	request.get("/api/user")
 		.end(function(err, res) {
-			self.username = res.body.username;
-			self.login = res.body.login;
-		})
+			this.user = res.body.user;
+			this.login = res.body.login;
+		}.bind(this))
 	},
   components: {
     'header-component': HeaderComponent,
