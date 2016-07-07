@@ -17,7 +17,7 @@ var steamApi = require('./endpoints');
 app.use(session({secret: 'keyboard cat maybe not'}));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static(path.join(__dirname, '/')));
+app.use(express.static(path.join(__dirname, '/dist')));
 
 passport.serializeUser(function(user, done) {
   done(null, user);
